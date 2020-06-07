@@ -1,0 +1,29 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+)$ index.php [QSA,L]
+
+#remodifié pour ne pas réécrire les css & js, sinon les réécrit en tant qu'index
+
+# d pour directory, f pour file
+
+# (.+) "du contenu". Exemple : /pages/(.+) s'applique à tous les urls précédés de /pages/
+
+# ^	Appelé ancrage, correspond au début de la chaîne. Exemple : ^a correspond à une chaîne qui commence par a
+
+# $	L'autre ancrage, correspond à la fin de la chaîne. Exemple : a$ correspond à une chaîne qui se termine par a
+
+# QSA : Lorsque l'URL de requête possède des arguments, le comportement par défaut de l'engine de RewritingRule
+# est de supprimer ces arguments et de les remplacer par leurs homologues générés lors de la réécriture.
+# Le drapeau [QSA] oblige le serveur à combiner ces paramètres à l'URL.
+# Détaillons l'exemple ci-dessous :
+# RewriteEngine On
+# RewriteRule /pages/(.+) /page.php?page=$1 [QSA]
+# Grâce au drapeau [QSA], la requête effectuée sur la page « /pages/123?one=two » sera redirigée sur « /pages.php?page=123&one=two ».
+# Si l'on avait omis le [QSA], le serveur aurait redirigé la page sur « /page.php?page=123 » en supprimant les arguments.
+
+# L : ESSENTIEL! Permet d'indiquer la fin de l'exécution de la réécriture. Sinon, le serveur pourrait looper !
+
+
+
+# note : possibilité d'ajouter des cookies avec [CO]
