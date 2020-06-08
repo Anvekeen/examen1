@@ -39,13 +39,11 @@ class UserDAO extends DAO
             $statement->execute([$username]);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $user = $this->create($result);
-            var_dump($user);
-
+            var_dump('verify', $user);
             if(password_verify($password, $user->__get('password'))) {
                 $this->getRandomToken($user);
                 return $user;
             }
-            var_dump('failed password verify');
             return false;
         } catch (PDOException $e) {
 

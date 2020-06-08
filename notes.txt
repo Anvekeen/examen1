@@ -1,0 +1,25 @@
+note importante :
+Si on a une variable $path,
+quelle différence if($path) et if(strlen($path)) ?
+
+if($path), rentre dans la condition dès lors qu'il y a une valeur associée à $path (ex : 10 ou 'tutu')
+OR, ne rentre pas dans la condition SI $path = null MAIS AUSSI si $path = 0 !!!
+En d'autre mots, la valeur 0 est considérée comme nulle or si c'est la valeur de notre variable,
+la condition sera ignorée malgré que $path=0....
+
+D'où l'intérêt de strlen.
+Il check juste si la LONGUEUR de la valeur stockée dans la variable est différent de 0.
+Donc, même si la valeur est égale à 0, strlen retourne 1 (car longueur du string) et voilà :D
+
+Donc pour résumer,
+if($path) check bien si la variable a une valeur mais ne prend pas zéro en compte
+if(strlen($path)) check bien si la valeur de la variable est + grande que zéro et prends en compte si la valeur est zéro
+
+
+A FAIRE?
+- devrais ajouter début fin de bail pour loctaires, pour suppression automatique
+apres x temps apres fin de contrat
+
+-permettre a proprietaires d'ajouter autres biens
+
+-gerer conflit proprio ? (si 2 au meme appart)

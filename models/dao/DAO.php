@@ -8,7 +8,7 @@ abstract class DAO // n'est pas instanciée dans l'état
     protected $object_list;
 
     function __construct() {
-        $this->connection = new PDO('mysql:host=localhost;dbname=examen', 'root', '');
+        $this->connection = new PDO('mysql:host=localhost;dbname=examen;charset=utf8mb4', 'root', '');
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $this->object_list = array();
     }
@@ -19,8 +19,8 @@ abstract class DAO // n'est pas instanciée dans l'état
 
     function save($data) {
         $data[$this->properties[0]] = -1;
-        if(isset($data['password']) && $data['password']) {
-            $data['password'] = $data['password'] ? password_hash($data['password'], PASSWORD_DEFAULT) : false;
+        if(isset($data['password']) && strlen($data['password'])) {
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
         }
         $object = $this->create($data);
         if ($object) {

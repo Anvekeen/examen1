@@ -1,18 +1,23 @@
+</main>
+
 <footer>
 
-    <nav class="navbar navbar-expand-lg  fixed-bottom navbar-dark bg-dark"">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="#">Features</a>
-            <a class="nav-item nav-link" href="#">Pricing</a>
-            <a class="nav-item nav-link disabled" href="#">Disabled</a>
-        </div>
-    </div>
+    <nav class="navbar navbar-light bg-light"">
+    <span class="navbar-text">
+				 <strong>IMMO VM -
+			Chaussée de Waterloo 148,
+					 1348 Louvain-la-Neuve</strong>
+			</span>
+
+    <span class="navbar-text">
+			Téléphone : <strong>010/68.25.48</strong>
+
+			Email : <strong>info@immovm.be</strong>
+		</span>
+
+    <span class="navbar-text">
+				 © 2020 Ifosup All rights Reserved
+			</span>
     </nav>
 
 </footer>

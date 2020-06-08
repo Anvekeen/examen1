@@ -3,6 +3,7 @@
 session_start();
 
 spl_autoload_register(function($class) {
+
     if($class == "Router") {
         include "router/Router.php";
     } else if (strpos($class, "Controller")) {
@@ -19,5 +20,4 @@ spl_autoload_register(function($class) {
 });
 
 $router = new Router($_GET, $_POST, $_SERVER['PHP_SELF'], $_SERVER['REQUEST_URI']);
-
 ?>

@@ -28,7 +28,7 @@ class Router {
         //on pouvait checker qu'est-ce que le self & url avec var_dump $_SERVER
         $this->get = $get;
         $this->post = $post;
-        $this->controller_list = ['index'];
+        $this->controller_list = ['index', 'portal', 'user']; // Elle est à hard-coder!
         $this->controller_name = false;
         $this->controller = false;
         $this->root = $this->parseRoot($self);
@@ -38,37 +38,42 @@ class Router {
     
     private function parseRoot($self) {
         //return str_replace('index.php', '', $self);
+        //note : le self = index dès lors qu'on est sur l'index ! (même si url affichée différente)
         return substr($self, 0, strpos($self, "index.php"));
     }
     
     private function parseURL($url) {
         // on a enlevé index.php de l'url pour obtenir le root
-        $path = str_replace($this->root, '', $url);
+        $path = str_ireplace($this->root, '', $url);
         $path = explode('/', $path);
-
+        $controller = false;
         //note : rentre d'office dans le if car path est array après le explode
-        //aussi! Ce if supprime le string s'il n'y a pas de "?" ! ex : index.php => ''
-        if ($path && $path[0]) {
+        //CORRIGE!!!aussi! Ce if supprime le string s'il n'y a pas de "?" ! ex : index.php => ''CORRIGE!!!
+        if ($path && strlen($path[0]) && (strpos($path[0], "?") !== false)) {
+            //check si path0 contient qqch et surtout s'il contient '?'
             $path[0]=substr($path[0],0,strpos($path[0],"?"));
         }
-        
-        $controller = false;
-        if($path && count($path) && strlen($path[0])) {
+
+        if($path && strlen($path[0]) && (strpos($path[0], ".") !== false)) {
             $path[0]=substr($path[0],0,strpos($path[0],"."));
             $controller = $path[0];
-        } else if(count($path) && !strlen($path[0])) {
+        } else if ($path && strlen($path[0])) {
+                $controller = $path[0];
+        } else if($path && !strlen($path[0])) {
             $controller = 'index';
-        }
-        
+         }
         if($controller && in_array($controller, $this->controller_list)) {
             $this->controller_name = ucfirst($controller.'Controller');
         }
         return $path;
     }
-    
+
+
     private function run() {
         if($this->controller_name) {
             $this->controller = new $this->controller_name($this->get, $this->post, $this->route);
         }
     }
+
+
 }

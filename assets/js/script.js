@@ -1,74 +1,31 @@
 $(document).ready(function() {
     console.log('1: jquery ready');
 
-    $('.productmodif').on('click', function() {
-        var id = $(this).attr("productinfo");
-        $.post('views/templates/update.php', { productid:id })
-            .done(function (objet) {
-                var product = JSON.parse(objet);
-                $('#productType').val('productupdate');
-                $('#productid').val(product.id);
-                $('#name').val(product.name);
-                $('#price').val(product.price);
-                $('#vat').val(product.vat);
-                $('#quantity').val(product.quantity);
+    $('#ShowSubForm').on('click', function() {
+        //Voulait avoir "$(#subscription).load('new_user_form.php');
+        //mais impossible à faire marcher.. probablement car repasse par le routeur,
+        // d'où le choix d'utiliser ça à mon avantage et faire une requete get
+        $.get('index', {form: 'show'}
+        )
+            .done(function(data) {
+                $('#subscription').html(data);
             });
     });
 
-    $('.usermodif').on('click', function() {
-        var id = $(this).attr("userinfo");
-        //console.log(id); //pour vérifier dans la console
-        $.post('update.php', { userid:id })
-            .done(function (objet) {
-                var user = JSON.parse(objet);
-                $('#userType').val('userupdate');
-                $('#userid').val(user.id);
-                $('#username').val(user.username);
-                $('#password').val(user.password);
-            });
-    });
 });
 
-/*$('#product-search-form').on('submit', function(event) {
-    event.preventDefault();
-    $.get('search_product.php', {idprod: $('#idsearchProduct').val()}
-    )
-        .done(function(data) {
-            $('#searchProduct').html(data);
-        });
-});
 
-$('#user-search-form').on('submit', function(event) {
-    event.preventDefault();
-    $.get('search_user.php', {iduser: $('#idsearchUser').val()}
+
+
+/* pas réussi à le faire marcher >_<
+   note : marchait pas pendant 100 ans...
+   car $('') contenait l'id du bouton submit et pas l'id du form !
+$('#LoginForm').on('submit', function(e) {
+    e.preventDefault();
+    console.log($('#LoginForm').serialize());
+    $.post('portal', $('#LoginForm').serialize()
     )
         .done(function(data) {
-            $('#searchUser').html(data);
+            $('#loginerror').html(data);
         });
 });*/
-
-
-//note : peut-être ajouter fonction de vérif longueur des champs form
-
-
-
-/*fais un popup à l'écran (les déconseille)
-alert('coucou');
-
-log dans console
-console.log('coucou console');
-
-JQUERY = Librairie = une boîte à outils
-
-<button type="button" id="btn">CLICK ME</button>
-    $('#btn').on('click', function() {
-        $('#product-list td').css('font-weight', 600);
-        //les td dans balise productlist, sinon si product-list, td = les deux
-       $('input[type="submit"]').val('A');
-       $(this).text('DONT');
-    });
-
-    /*$('.delete-btn').on('click', function() {
-        $(this).parents('tr').first().detach();
-    });
-*/

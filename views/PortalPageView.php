@@ -1,6 +1,6 @@
 <?php
 
-class IndexPageView {
+class PortalPageView {
     private $page;
     private $render;
 
@@ -10,25 +10,13 @@ class IndexPageView {
     }
 
     function displayPage() {  //fonction principale 1
-        $add = $this->generateLogin();
-        $this->template($add);
+        $this->template();
         return $this->render;
     }
 
-    function displayPageError() {  //affiche erreur de login
-        $add = $this->generateError();
-        $add .= $this->generateLogin();
-        $this->template($add);
-        return $this->render;
-    }
-
-    function displaySub($data) {  //appel du formulaire
-        return $this->generateSub($data);
-    }
-
-    function template($add) { //fonction composition de la page (appelée dans les fonctions principales)
+    function template() { //fonction composition de la page (appelée dans les fonctions principales)
         $this->page = $this->generateHeader();
-        $this->page .= $add;
+        //
         $this->page .= $this->generateFooter();
         $this->render = $this->generateShell();
     }
@@ -42,12 +30,6 @@ class IndexPageView {
     function generateLogin() {
         ob_start();
         include 'views/templates/login.php';
-        return ob_get_clean();
-    }
-
-    function generateError() {
-        ob_start();
-        include 'views/templates/loginerror.php';
         return ob_get_clean();
     }
 
