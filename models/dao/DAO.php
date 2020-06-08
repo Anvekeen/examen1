@@ -19,9 +19,6 @@ abstract class DAO // n'est pas instanciée dans l'état
 
     function save($data) {
         $data[$this->properties[0]] = -1;
-        if(isset($data['password']) && strlen($data['password'])) {
-            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-        }
         $object = $this->create($data);
         if ($object) {
             $qry = "(";

@@ -17,19 +17,35 @@ class UserDAO extends DAO
         parent::__construct();
     }
 
-    function create($data) {
-        //$data['vat'] ? $data['vat] : 0  ==> condition ? si oui : si non;
-        return new User(
-            $data['UserID'],
-            $this->users_typeDAO->fetch($data['usertypeID']),
-            //$data['usertypeID'],
-            $data['username'],
-            $data['password'],
-            $data['userbuildingID'],
-            $data['apartment_number'],
-            isset($data['session_token']) ? $data['session_token'] : false,
-            isset($data['session_time']) ?  $data['session_time'] : false
-        );
+    function create($data)
+    {
+        if (isset($data['password']) && strlen($data['password'])) {
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+        }
+        if ($data['userID'] > 0) {
+            var_dump('cas 1');
+            return new User(                $data['userID'],
+                $this->users_typeDAO->fetch($data['usertypeID']),
+                $data['username'],
+                $data['password'],
+                $data['userbuildingID'],
+                $data['apartment_number'],
+                isset($data['session_token']) ? $data['session_token'] : false,
+                isset($data['session_time']) ? $data['session_time'] : false
+            );
+        } else {
+            var_dump('cas 2');
+            return new User(
+                $data['userID'],
+                $data['usertypeID'],
+                $data['username'],
+                $data['password'],
+                $data['userbuildingID'],
+                $data['apartment_number'],
+                isset($data['session_token']) ? $data['session_token'] : false,
+                isset($data['session_time']) ? $data['session_time'] : false
+            );
+        }
     }
 
 

@@ -23,3 +23,6 @@ apres x temps apres fin de contrat
 -permettre a proprietaires d'ajouter autres biens
 
 -gerer conflit proprio ? (si 2 au meme appart)
+
+astuce :
+//$data['vat'] ? $data['vat] : 0  ==> condition ? si oui : si non;

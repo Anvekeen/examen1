@@ -11,18 +11,23 @@ class IndexController {
         $this->view = new IndexPageView();
 
         if (isset($get['form']) && $get['form'] == 'show') { // affiche form d'inscription
-            $this->displaySub($this->buildingdao->fetchAll());
+            $this->displaySubForm($this->buildingdao->fetchAll());
         } else if (isset($route[1]) && $route[1] == 'redirect') { // après être passé dans portalcontroller, si login faux
             // pas sûr si mieux une nouvelle fonction comme ici, ou passer un param dans displaypage
             // pour ensuite choisir avec un ifparam=X ou ifparam=Y ... et éviter cette new fonction
             $this->displayPageError();
-        } else {
-            if (isset($post['InputEmailSub'], $post['InputPasswordSub'], $post['InputType'], $post['InputBuilding'], $post['InputAppart']) &&
-                strlen($post['InputEmailSub']) && strlen($post['InputPasswordSub']) && strlen($post['InputType']) && strlen($post['InputBuilding']) && strlen($post['InputAppart'])) {
+        } else if (isset($post['username'], $post['password'], $post['usertypeID'], $post['userbuildingID'], $post['apartment_number']) &&
+                strlen($post['username']) &&
+                strlen($post['password']) &&
+                strlen($post['usertypeID']) &&
+                strlen($post['userbuildingID']) &&
+                strlen($post['apartment_number'])) {
                 $post = array_map('htmlspecialchars', $post);
-            } else {
+                $this->userdao->save($post);
+                $this->displaySubValidation();
+            /*}else { //todo
                 var_dump('subscription failed');
-            }
+            }*/
         }
         else {
             $this->displayPage();
@@ -44,13 +49,16 @@ class IndexController {
         echo $this->view->displayPage();
     }
 
-    function displayPageError()
-    {
+    function displayPageError() {
         echo $this->view->displayPageError();
     }
 
-        function displaySub($data) {
-        echo $this->view->displaySub($data);
+    function displaySubValidation() {
+        echo $this->view->displaySubValidation();
+    }
+
+        function displaySubForm($data) {
+        echo $this->view->displaySubForm($data);
     }
 
 }

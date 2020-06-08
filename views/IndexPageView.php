@@ -22,8 +22,12 @@ class IndexPageView {
         return $this->render;
     }
 
-    function displaySub($data) {  //appel du formulaire
-        return $this->generateSub($data);
+    function displaySubForm($data) {  //appel du formulaire
+        return $this->generateSubForm($data);
+    }
+
+    function displaySubValidation() {  //appel du formulaire
+        return $this->generateSubValidation();
     }
 
     function template($add) { //fonction composition de la page (appelée dans les fonctions principales)
@@ -51,9 +55,14 @@ class IndexPageView {
         return ob_get_clean();
     }
 
-    function generateSub($buildings) {
+    function generateSubForm($buildings) {
         ob_start();
         include 'views/templates/new_user_form.php';
+        return ob_get_clean();
+    }
+    function generateSubValidation() {
+        ob_start();
+        include 'views/templates/subconfirmed.php';
         return ob_get_clean();
     }
 

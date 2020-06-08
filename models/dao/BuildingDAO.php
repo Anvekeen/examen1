@@ -18,7 +18,7 @@ class BuildingDAO extends DAO
     function create($data) {
         //$data['vat'] ? $data['vat] : 0  ==> condition ? si oui : si non;
         return new Building(
-        $data['buildingID'],
+            $data['buildingID'],
             $data['buildingcityID'],
             $data['buildingname'],
             $data['buildingaddress'] ? $data['buildingaddress'] : 0
