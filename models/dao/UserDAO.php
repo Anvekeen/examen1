@@ -19,12 +19,9 @@ class UserDAO extends DAO
 
     function create($data)
     {
-        if (isset($data['password']) && strlen($data['password'])) {
-            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-        }
         if ($data['userID'] > 0) {
-            var_dump('cas 1');
-            return new User(                $data['userID'],
+            return new User(
+                $data['userID'],
                 $this->users_typeDAO->fetch($data['usertypeID']),
                 $data['username'],
                 $data['password'],
@@ -34,7 +31,7 @@ class UserDAO extends DAO
                 isset($data['session_time']) ? $data['session_time'] : false
             );
         } else {
-            var_dump('cas 2');
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
             return new User(
                 $data['userID'],
                 $data['usertypeID'],
@@ -49,22 +46,23 @@ class UserDAO extends DAO
     }
 
 
-    function verify($username, $password) {
+    function verify($username, $password)
+    {
         try {
             $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE username = ?");
             $statement->execute([$username]);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
-            $user = $this->create($result);
-            var_dump('verify', $user);
-            if(password_verify($password, $user->__get('password'))) {
-                $this->getRandomToken($user);
-                return $user;
+            if ($result) {
+                $user = $this->create($result);
+                if (password_verify($password, $user->__get('password'))) {
+                    $this->getRandomToken($user);
+                    return $user;
+                }
+            } return false; }
+        catch
+            (PDOException $e) {
+                print $e->getMessage();
             }
-            return false;
-        } catch (PDOException $e) {
-
-            print $e->getMessage();
-        }
     }
 
     function getRandomToken($user) {
@@ -79,8 +77,6 @@ class UserDAO extends DAO
         try {
             $statement = $this->connection->prepare("UPDATE {$this->table} SET session_token = ?, session_time = ? WHERE userID = ?");
             $statement->execute([$user->__get('session_token'), $user->__get('session_time'), $user->__get('userID')]);
-            var_dump('user updated');
-            header('location:index.php');
         } catch (PDOException $e) {
             print $e->getMessage();
         }

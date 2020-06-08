@@ -44,7 +44,7 @@ abstract class DAO // n'est pas instanciée dans l'état
                 $statement->execute($values);
             } catch(PDOException $e) {
                 if($e->getCode() == "23000") {
-                    echo "Cet utilisateur existe déjà";
+                    return 'doublon';
                 } else {
                 print $e->getMessage();
                 }

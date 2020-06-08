@@ -9,14 +9,14 @@ class PortalPageView {
         $this->render = false;
     }
 
-    function displayPage() {  //fonction principale 1
-        $this->template();
+    function displayPage($data) {  //fonction principale 1
+        $this->template($data);
         return $this->render;
     }
 
-    function template() { //fonction composition de la page (appelée dans les fonctions principales)
+    function template($data) { //fonction composition de la page (appelée dans les fonctions principales)
         $this->page = $this->generateHeader();
-        //
+        $this->page .= $this->generatePortal($data);
         $this->page .= $this->generateFooter();
         $this->render = $this->generateShell();
     }
@@ -27,21 +27,16 @@ class PortalPageView {
         return ob_get_clean();
     }
 
-    function generateLogin() {
+    function generatePortal($user) {
         ob_start();
-        include 'views/templates/login.php';
+        include 'views/templates/portal.php';
         return ob_get_clean();
     }
 
-    function generateSub($buildings) {
-        ob_start();
-        include 'views/templates/new_user_form.php';
-        return ob_get_clean();
-    }
 
     function generateHeader() {
         ob_start();
-        include 'views/templates/header.php';
+        include 'views/templates/headerlog.php';
         return ob_get_clean();
     }
 

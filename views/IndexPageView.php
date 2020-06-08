@@ -15,19 +15,15 @@ class IndexPageView {
         return $this->render;
     }
 
-    function displayPageError() {  //affiche erreur de login
-        $add = $this->generateError();
-        $add .= $this->generateLogin();
+    function displayLogMessage($message) {  //affiche erreur de login
+        $add = $this->generateLogin();
+        $add .= $this->generateLogMessage($message);
         $this->template($add);
         return $this->render;
     }
 
     function displaySubForm($data) {  //appel du formulaire
         return $this->generateSubForm($data);
-    }
-
-    function displaySubValidation() {  //appel du formulaire
-        return $this->generateSubValidation();
     }
 
     function template($add) { //fonction composition de la page (appelée dans les fonctions principales)
@@ -49,20 +45,15 @@ class IndexPageView {
         return ob_get_clean();
     }
 
-    function generateError() {
+    function generateLogMessage($message) {
         ob_start();
-        include 'views/templates/loginerror.php';
+        include 'views/templates/loginmessage.php';
         return ob_get_clean();
     }
 
     function generateSubForm($buildings) {
         ob_start();
         include 'views/templates/new_user_form.php';
-        return ob_get_clean();
-    }
-    function generateSubValidation() {
-        ob_start();
-        include 'views/templates/subconfirmed.php';
         return ob_get_clean();
     }
 

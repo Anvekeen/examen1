@@ -3,7 +3,7 @@ todo check dans le naviguateur, on aura htmlspecialchars et password_verify tc �
 <div class="container p-3">
     <h1 class="display-5 text-black">Nouveau sur le site ? </h1>
     <h1 class="display-5 text-black">Remplissez notre formulaire d'inscription !</h1>
-    <form id="NewUserForm"  action="/Examen1/index" method="post">
+    <form id="NewUserForm" action="/examen1/index" method="post">
         <div class="form-group">
             <label for="InputEmailSub">Adresse Mail :</label>
             <input type="email" class="form-control" id="InputEmailSub" name="username" placeholder="Entrez votre adresse mail" required>
@@ -37,9 +37,9 @@ todo check dans le naviguateur, on aura htmlspecialchars et password_verify tc �
         <div class="row">
         <div class="form-group col-md-4">
             <label for="InputBuilding">Immeuble :</label>
-            <?php foreach ($buildings as $building): ?>
             <select id="InputBuilding" class="form-control" name="userbuildingID"  required>
-                <option value="<?= $building->__get('buildingID'); ?>"><?= $building->__get('buildingname'); ?></option>
+                <?php foreach ($buildings as $building): ?>
+                <option value="<?= $building->__get('buildingID'); ?>"> <?= $building->__get('buildingname'); ?> </option>
                 <?php endforeach; ?>
             </select>
             <small>Si vous êtes propriétaire non-résident, veuillez indiquer le lieu dont vous êtes propriétaire. Si vous possédez plus d'un appartement, vous aurez la possibilité d'en ajouter par la suite.</small>
@@ -49,7 +49,7 @@ todo check dans le naviguateur, on aura htmlspecialchars et password_verify tc �
             <input type="number" class="form-control" id="InputAppart" name="apartment_number" >
         </div>
         </div>
-        <button type="submit" class="btn btn-primary">Inscription</button>
+        <button type="submit" id="NewSubBut" class="btn btn-primary">Inscription</button>
     </form>
 </div>
 
