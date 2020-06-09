@@ -9,6 +9,7 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="/Examen1/portal">Accueil</a>
                 <a class="nav-item nav-link" href="/Examen1/Building">Immeubles</a>
+                <a class="nav-item nav-link" href="/Examen1/index/disconnect">Déconnexion</a>
                 <a class="nav-item nav-link disabled" href="#">Disabled</a>
             </div>
         </div>

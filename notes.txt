@@ -26,3 +26,23 @@ apres x temps apres fin de contrat
 
 astuce :
 //$data['vat'] ? $data['vat] : 0  ==> condition ? si oui : si non;
+
+
+- ajouts de param pour setcookies -> mode httpOnly réduit les risques de faille XSS
+(empêche l'accès du cookie en javascript, voir le lien ci-dessous)
+https://openclassrooms.com/fr/courses/918836-concevez-votre-site-web-avec-php-et-mysql/4239476-session-cookies
+
+
+- au cas où, se rappeler de ceci :
+Il y a un petit problème avec  setcookie … Comme pour  session_start , cette fonction ne marche
+QUE si vous l'appelez avant tout code HTML (donc avant la balise <!DOCTYPE>).
+
+- note : si delete user, faut delete les comm lié à ce user aussi ! :-)
+
+RAPPEL :
+if(isset) => faux seulement pour NULL
+if($var) => faux pour zéro, NULL et FALSE
+if(strlen($var)) => faux pour NULL et FALSE
+(testé sur string,int, 0, null et false)
+
+- du coup, pas besoin de session_start?

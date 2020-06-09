@@ -30,7 +30,7 @@ class UserDAO extends DAO
                 isset($data['session_token']) ? $data['session_token'] : false,
                 isset($data['session_time']) ? $data['session_time'] : false
             );
-        } else {
+        } else if($data) {
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
             return new User(
                 $data['userID'],
@@ -42,6 +42,8 @@ class UserDAO extends DAO
                 isset($data['session_token']) ? $data['session_token'] : false,
                 isset($data['session_time']) ? $data['session_time'] : false
             );
+        } else {
+            return false;
         }
     }
 
@@ -69,7 +71,8 @@ class UserDAO extends DAO
         $token = bin2hex(random_bytes(8)) . "." . time();
         $user->__set('session_token', $token);
         $user->__set('session_time', date('Y-m-d H:i:s'));
-        setcookie('session_token', $token, time()+60*60*24);
+        setcookie('session_token', $token, time()+60*60*24, "/");
+        // Le dernier paramètre  true  permet d'activer le mode  httpOnly  sur le cookie (voir notes)
         $this->update($user);
     }
 
@@ -89,21 +92,16 @@ class UserDAO extends DAO
                 $statement->execute([$cookie]);
                 $result = $statement->fetch(PDO::FETCH_ASSOC);
                 $user = $this->create($result);
-
                 if($user && $user->__get('session_time')) {
                     $cookieDatetime = new DateTime($user->__get('session_time'));
                     $cookieDatetime = $cookieDatetime->getTimestamp();
                     $actualDatetime = new DateTime();
                     $actualDatetime = $actualDatetime->getTimestamp();
-                    $expired = 1;
+                    $expired = 24*60*60;
                     if ( $cookieDatetime+$expired >= $actualDatetime ){
                         return $user;
-                    } else {
-                        var_dump("Cookie périmé");
                     }
-                }  else {
-                    var_dump("No session time, needs to login first");
-                }
+                } return false;
             } catch (PDOException $e) {
                 print $e->getMessage();
             }
