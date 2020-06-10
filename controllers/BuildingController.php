@@ -29,7 +29,7 @@ class BuildingController
                 header('location:/examen1/index');
             }
         } else {
-            header("Location:/Examen1/index");
+            header("Location:/examen1/index");
         }
     }
 

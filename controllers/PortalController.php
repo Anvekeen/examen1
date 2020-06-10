@@ -30,7 +30,7 @@ class PortalController
             if ($user) {
                 $this->testUser($user);
             } else {
-                header("Location:/Examen1/index/redirect");
+                header("Location:/examen1/index/redirect");
             }
         } else if(isset($_COOKIE['session_token']) && strlen($_COOKIE['session_token'])) {
             $user = $this->fetchbyCookie($_COOKIE['session_token']);
@@ -40,7 +40,7 @@ class PortalController
                 header('location:/examen1/index');
             }
         } else {
-            header("Location:/Examen1/index");
+            header("Location:/examen1/index");
         }
     }
 

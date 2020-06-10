@@ -37,7 +37,7 @@
         <div class="row">
         <div class="form-group col-md-4">
             <label for="InputBuilding">Immeuble :</label>
-            <select id="InputBuilding" class="form-control" name="userbuildingID"  required>
+            <select id="InputBuilding" class="form-control" name="userbuildingID">
                 <?php foreach ($buildings as $building): ?>
                 <?php if($building->__get('buildingID') > 1) { ?>
                 <option value="<?= $building->__get('buildingID'); ?>"> <?= $building->__get('buildingname'); ?> </option>
@@ -48,10 +48,10 @@
         </div>
             <div class="form-group col-md-4">
             <label for="InputAppart"> Appartement :</label>
-            <input type="number" class="form-control" id="InputAppart" name="apartment_number" >
+            <input type="number" class="form-control" id="InputAppart" name="apartment_number" required>
         </div>
         </div>
         <button type="submit" id="NewSubBut" class="btn btn-primary">Inscription</button>
     </form>
-</div>
+
 

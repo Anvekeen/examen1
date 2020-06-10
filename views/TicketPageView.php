@@ -1,6 +1,6 @@
 <?php
 
-class IndexPageView {
+class TicketPageView {
     private $page;
     private $render;
 
@@ -9,25 +9,17 @@ class IndexPageView {
         $this->render = false;
     }
 
-    function displayPage() {  //fonction principale 1
-        $add = $this->generateLogin();
+    function displayPage($data1, $data2, $data3, $message) {
+        $add = $this->generateHeader($data1);
+        if($message){
+        $add .= $this->generateMessage($message);
+        }
+        $add .= $this->generatePage($data1, $data2, $data3);
         $this->template($add);
         return $this->render;
     }
 
-    function displayLogMessage($message) {  //affiche erreur de login
-        $add = $this->generateLogin();
-        $add .= $this->generateLogMessage($message);
-        $this->template($add);
-        return $this->render;
-    }
-
-    function displaySubForm($data) {  //appel du formulaire
-        return $this->generateSubForm($data);
-    }
-
-    function template($add) { //fonction composition de la page (appelée dans les fonctions principales)
-        $this->page = $this->generateHeader();
+    function template($add) {
         $this->page .= $add;
         $this->page .= $this->generateFooter();
         $this->render = $this->generateShell();
@@ -39,27 +31,22 @@ class IndexPageView {
         return ob_get_clean();
     }
 
-    function generateLogin() {
-        ob_start();
-        include 'views/templates/login.php';
-        return ob_get_clean();
-    }
-
-    function generateLogMessage($message) {
+    function generateMessage($message) {
         ob_start();
         include 'views/templates/message.php';
         return ob_get_clean();
     }
 
-    function generateSubForm($buildings) {
+    function generatePage($user, $stateID, $buildings)
+    {
         ob_start();
-        include 'views/templates/new_user_form.php';
+        include 'views/templates/ticket.php';
         return ob_get_clean();
     }
 
-    function generateHeader() {
+    function generateHeader($user) {
         ob_start();
-        include 'views/templates/header.php';
+        include 'views/templates/headerlog.php';
         return ob_get_clean();
     }
 

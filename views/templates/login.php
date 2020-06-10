@@ -1,6 +1,6 @@
 
 
-    <form id="LoginForm" action="/Examen1/portal" method="post">
+    <form id="LoginForm" action="/examen1/portal" method="post">
         <div class="form-group">
             <label for="InputEmail">Adresse email :</label>
             <input type="email" class="form-control" id="InputEmail" name="InputEmail" placeholder="Entrez votre adresse mail" required>

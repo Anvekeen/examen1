@@ -33,6 +33,7 @@ class CommunicationDAO extends DAO
             $data['commdate']
         );
         } else if($data) {
+            $data['commdate'] = date('Y-m-d H:i:s');
             return new Communication(
                 $data['commID'],
                 $data['commbuildingID'],
@@ -40,7 +41,7 @@ class CommunicationDAO extends DAO
                 $data['commstateID'],
                 $data['commtitle'],
                 $data['commdescription'],
-                $data['commdate'] ? $data['commdate'] : new DateTime()
+                $data['commdate']
             );
         } else {
             return false;

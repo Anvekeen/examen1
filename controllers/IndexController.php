@@ -20,7 +20,7 @@ class IndexController {
             }
                 $this->displayPage();
         } else if(isset($route[1]) && $route[1] == 'redirect') {
-            $message = 'Votre adresse mail et/ou mot de passe est incorrect.';
+            $message = 'Votre adresse mail et/ou mot de passe est incorrect';
             $this->displayLogMessage($message);
             // après être passé dans portalcontroller, si login faux
             // pas sûr si mieux une nouvelle fonction comme ici, ou passer un param dans displaypage
@@ -44,10 +44,10 @@ class IndexController {
                 $post = array_map('htmlspecialchars', $post);
                 $newuser = $this->userdao->save($post);
                 if($newuser == 'doublon') {
-                    $message = 'Cette adresse mail est déjà enregistrée. Veuillez en choisir une autre.';
+                    $message = 'Cette adresse mail est déjà enregistrée. Veuillez en choisir une autre';
                     $this->displayLogMessage($message);
                 } else {
-                    $message = 'Inscription validée.';
+                    $message = 'Inscription validée';
                     $this->displayLogMessage($message);
             }
         }
