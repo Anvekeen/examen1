@@ -28,7 +28,7 @@ class Router {
         //on pouvait checker qu'est-ce que le self & url avec var_dump $_SERVER
         $this->get = $get;
         $this->post = $post;
-        $this->controller_list = ['index', 'portal', 'user']; // Elle est à hard-coder!
+        $this->controller_list = ['index', 'portal', 'building']; // Elle est à hard-coder!
         $this->controller_name = false;
         $this->controller = false;
         $this->root = $this->parseRoot($self);

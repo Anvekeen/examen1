@@ -5,13 +5,28 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarMenu">
-            <div class="navbar-nav">
-                <a class="nav-item nav-link" href="/Examen1/portal">Accueil</a>
-                <a class="nav-item nav-link" href="/Examen1/Building">Immeubles</a>
-                <a class="nav-item nav-link" href="/Examen1/index/disconnect">Déconnexion</a>
-                <a class="nav-item nav-link disabled" href="#">Disabled</a>
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="navbarMenu">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-item nav-link" href="/Examen1/portal">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item nav-link" href="/Examen1/building">Immeubles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item nav-link disabled" href="#">Disabled</a>
+                    </li>
+                </ul>
             </div>
+    <div class="mx-auto order-0">
+        <span class="navbar-brand mx-auto"> Bienvenue, <?= $user->__get('username')?> </span>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-item nav-link" href="/Examen1/index/disconnect">Déconnexion</a>
+            </li>
+        </ul>
         </div>
     </nav>
 

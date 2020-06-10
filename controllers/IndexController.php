@@ -9,6 +9,8 @@ class IndexController {
         $this->userdao = new UserDAO();
         $this->buildingdao = new BuildingDAO();
         $this->view = new IndexPageView();
+
+
         if(isset($route[1]) && $route[1] == 'disconnect') {
             if (isset($_COOKIE['session_token'])) {
                 // si cookie, on lui donne une date d'expiration négative (pour le supprimer)

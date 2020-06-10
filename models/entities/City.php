@@ -6,12 +6,14 @@ class City
     private $cityID;
     private $cityname;
     private $cityZIP;
+    private $valide;
 
-    public function __construct($cityID, $cityname, $cityZIP)
+    public function __construct($cityID, $cityname, $cityZIP, $valide)
     {
         $this->cityID = $cityID;
         $this->cityname = $cityname;
         $this->cityZIP = $cityZIP;
+        $this->valide = $valide;
     }
 
     function __get($property) {

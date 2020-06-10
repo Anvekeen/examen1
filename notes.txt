@@ -45,4 +45,6 @@ if($var) => faux pour zéro, NULL et FALSE
 if(strlen($var)) => faux pour NULL et FALSE
 (testé sur string,int, 0, null et false)
 
-- du coup, pas besoin de session_start?
+dans table user.... Si user est syndic.... toujours num appart et building????? Faudrait corriger ça.
+
+pas de delete cascade pour cities vu qu'on est en softdelete, donc qu'à priori aucune ville ne sera hard-delete

@@ -7,6 +7,7 @@ class Users_typeDAO extends DAO
     protected $id;
     protected $properties;
     protected $deleteBehaviour;
+    protected $saveBehaviour;
 
     function __construct()
     {
@@ -14,14 +15,14 @@ class Users_typeDAO extends DAO
         $this->id = 'typeID';
         $this->properties = ['typeID', 'typename'];
         $this->deleteBehaviour = new HardDeleteBehaviour();
+        $this->saveBehaviour = new NormalSaveBehaviour();
         parent::__construct();
     }
 
     function create($data) {
-        //$data['vat'] ? $data['vat] : 0  ==> condition ? si oui : si non;
         return new Users_type(
             $data['typeID'],
-            $data['typename'] ? $data['typename'] : 0
+            $data['typename']
         );
     }
 

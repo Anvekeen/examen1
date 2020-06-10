@@ -1,11 +1,13 @@
 <?php
 
 
+
 class UserDAO extends DAO
 {
     protected $table;
     protected $properties;
     protected $deleteBehaviour;
+    protected $saveBehaviour;
     protected $users_typeDAO;
 
     function __construct()
@@ -13,6 +15,7 @@ class UserDAO extends DAO
         $this->table = 'users';
         $this->properties = ['userID', 'usertypeID', 'username', 'password', 'userbuildingID', 'apartment_number', 'session_token', 'session_time'];
         $this->deleteBehaviour = new HardDeleteBehaviour();
+        $this->saveBehaviour = new LoggedSaveBehaviour();
         $this->users_typeDAO = new Users_typeDAO();
         parent::__construct();
     }
@@ -39,8 +42,8 @@ class UserDAO extends DAO
                 $data['password'],
                 $data['userbuildingID'],
                 $data['apartment_number'],
-                isset($data['session_token']) ? $data['session_token'] : false,
-                isset($data['session_time']) ? $data['session_time'] : false
+                isset($data['session_token']) ? $data['session_token'] : bin2hex(random_bytes(8)) . "." . time(),
+                isset($data['session_time']) ? $data['session_time'] : date('Y-m-d H:i:s')
             );
         } else {
             return false;
@@ -72,7 +75,6 @@ class UserDAO extends DAO
         $user->__set('session_token', $token);
         $user->__set('session_time', date('Y-m-d H:i:s'));
         setcookie('session_token', $token, time()+60*60*24, "/");
-        // Le dernier paramètre  true  permet d'activer le mode  httpOnly  sur le cookie (voir notes)
         $this->update($user);
     }
 

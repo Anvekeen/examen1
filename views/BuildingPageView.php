@@ -1,6 +1,6 @@
 <?php
 
-class PortalPageView {
+class BuildingPageView {
     private $page;
     private $render;
 
@@ -11,20 +11,19 @@ class PortalPageView {
 
     function displayPageAll($data1, $data2, $data3) {
         $add = $this->generateHeader($data1);
-        $add .= $this->generatePortalAll($data1, $data2, $data3);
+        $add .= $this->generatePageAll($data1, $data2, $data3);
         $this->template($add);
         return $this->render;
     }
 
     function displayPageSingle($data1, $data2, $data3) {
         $add = $this->generateHeader($data1);
-        $add .= $this->generatePortalSingle($data1, $data2, $data3);
+        $add .= $this->generatePageSingle($data1, $data2, $data3);
         $this->template($add);
         return $this->render;
     }
 
-
-    function template($add) { //fonction composition de la page (appelée dans les fonctions principales)
+    function template($add) {
         $this->page .= $add;
         $this->page .= $this->generateFooter();
         $this->render = $this->generateShell();
@@ -36,18 +35,19 @@ class PortalPageView {
         return ob_get_clean();
     }
 
-    function generatePortalAll($user, $comms, $buildings) {
+    function generatePageAll($user, $user_list, $buildings)
+    {
         ob_start();
-        include 'views/templates/portal_all.php';
+        include 'views/templates/building_all.php';
         return ob_get_clean();
     }
 
-    function generatePortalSingle($user, $comms, $buildings) {
+    function generatePageSingle($user, $user_list, $buildings)
+    {
         ob_start();
-        include 'views/templates/portal_single.php';
+        include 'views/templates/building_single.php';
         return ob_get_clean();
     }
-
 
     function generateHeader($user) {
         ob_start();
